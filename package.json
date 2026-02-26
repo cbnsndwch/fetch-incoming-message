@@ -3,6 +3,9 @@
     "description": "An experimental fetch-aligned IncomingMessage implementation for node:http",
     "version": "0.1.0",
     "type": "module",
+    "repository": {
+        "url": "https://github.com/cbnsndwch/fetch-incoming-message"
+    },
     "author": {
         "name": "Sergio leon",
         "url": "https://cbnsndwch.io"
