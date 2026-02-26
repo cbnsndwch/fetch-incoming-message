@@ -29,27 +29,30 @@ const servers = [
     {
         name: `node-fetch-server@${pkg.version}`,
         command: 'node',
-        args: ['./servers/node-fetch-server.mjs']
+        args: ['./servers/node-fetch-server.mjs'],
+        port: 13000
     },
     {
         name: `node:http@${nodeVersion}`,
         command: 'node',
-        args: ['./servers/node-http.mjs']
+        args: ['./servers/node-http.mjs'],
+        port: 13001
     },
     {
         name: `express@${expressVersion}`,
         command: 'node',
-        args: ['./servers/express.mjs']
+        args: ['./servers/express.mjs'],
+        port: 13002
     },
 ];
 
 async function runBenchmark(server) {
-    console.log(`\nRunning benchmark for ${server.name} ...\n`);
+    console.log(`\nRunning benchmark for ${server.name} on port ${server.port} ...\n`);
 
     const serverProcess = spawn(server.command, server.args, {
         cwd: __dirname,
         stdio: 'inherit',
-        env: { ...process.env, PORT: '3000' },
+        env: { ...process.env, PORT: server.port.toString() },
     });
 
     // Wait for server to start
@@ -57,9 +60,10 @@ async function runBenchmark(server) {
 
     try {
         await new Promise((resolve, reject) => {
-            const args = ['exec', 'artillery', 'run', join(__dirname, 'bench-config.yaml')];
+            const args = ['exec', 'artillery', 'run', '--target', `http://127.0.0.1:${server.port}`, join(__dirname, 'bench-config.yaml')];
             // Use pnpm to run artillery
             const artillery = spawn('pnpm', args, {
+                cwd: rootDir, // Run from root where pnpm is configured
                 stdio: 'inherit',
                 shell: true
             });

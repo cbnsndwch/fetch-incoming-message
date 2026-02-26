@@ -3,7 +3,8 @@
         "Geppetto",
         "mjackson",
         "oxfmt",
-        "oxlint"
+        "oxlint",
+        "taskkill"
     ],
     "debug.inlineValues": "on",
     "editor.defaultFormatter": "oxc.oxc-vscode",

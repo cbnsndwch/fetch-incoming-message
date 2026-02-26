@@ -18,8 +18,6 @@ app.get("/", (_req, res) => {
     });
 
     body.pipe(res);
-
-    res.end();
 });
 
 app.listen(PORT, () => {
