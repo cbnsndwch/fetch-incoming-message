@@ -1,6 +1,6 @@
-import type { Socket } from "node:net";
-import { Readable, finished } from "node:stream";
-import { ReadableStream } from "node:stream/web";
+import type { Socket } from 'node:net';
+import { Readable, finished } from 'node:stream';
+import { ReadableStream } from 'node:stream/web';
 
 import type {
     ReferrerPolicy,
@@ -9,11 +9,11 @@ import type {
     RequestCredentials,
     RequestDestination,
     RequestMode,
-    RequestRedirect,
-} from "undici-types";
+    RequestRedirect
+} from 'undici-types';
 
-import Headers from "./headers.js";
-import { matchKnownFields, onError } from "./utils.js";
+import Headers from './headers.js';
+import { matchKnownFields, onError } from './utils.js';
 
 export default class FetchIncomingMessage extends Readable implements Request {
     public url!: string;
@@ -37,10 +37,12 @@ export default class FetchIncomingMessage extends Readable implements Request {
     referrerPolicy!: ReferrerPolicy;
     formData: any;
 
-    public duplex = "half" as const;
+    public duplex = 'half' as const;
 
     constructor(public readonly socket: Socket) {
-        const streamOptions = socket ? { highWaterMark: socket.readableHighWaterMark } : undefined;
+        const streamOptions = socket
+            ? { highWaterMark: socket.readableHighWaterMark }
+            : undefined;
 
         super(streamOptions);
     }
@@ -85,7 +87,7 @@ export default class FetchIncomingMessage extends Readable implements Request {
     //#region Fetch API
 
     public clone(): FetchIncomingMessage {
-        throw new Error("Method not implemented.");
+        throw new Error('Method not implemented.');
     }
 
     // Implement Fetch API body methods
@@ -107,7 +109,7 @@ export default class FetchIncomingMessage extends Readable implements Request {
 
     async text() {
         const buffer = await this.arrayBuffer();
-        return Buffer.from(buffer).toString("utf-8");
+        return Buffer.from(buffer).toString('utf-8');
     }
 
     async json() {
@@ -139,7 +141,7 @@ export default class FetchIncomingMessage extends Readable implements Request {
 
             // If there is buffered data, it may trigger 'data' events.
             // Remove 'data' event listeners explicitly.
-            this.removeAllListeners("data");
+            this.removeAllListeners('data');
             this.resume();
         }
     }
@@ -151,7 +153,7 @@ export default class FetchIncomingMessage extends Readable implements Request {
                 // this[kTrailersCount] = n;
                 // dest = this[kTrailers];
 
-                throw new Error("Setting trailers not implemented");
+                throw new Error('Setting trailers not implemented');
             }
 
             for (let i = 0; i < headerCount; i += 2) {
@@ -162,7 +164,7 @@ export default class FetchIncomingMessage extends Readable implements Request {
 
     setTimeout(msecs: number, callback: (...args: any[]) => void) {
         if (callback) {
-            this.on("timeout", callback);
+            this.on('timeout', callback);
         }
 
         this.socket.setTimeout(msecs);
@@ -214,7 +216,7 @@ export default class FetchIncomingMessage extends Readable implements Request {
     _destroy(err: Error, cb: Function) {
         if (!this.readableEnded || !this.complete) {
             this.aborted = true;
-            this.emit("aborted");
+            this.emit('aborted');
         }
 
         // If aborted and the underlying socket is not already destroyed,
@@ -224,8 +226,8 @@ export default class FetchIncomingMessage extends Readable implements Request {
         // in `test/parallel/test-http-client-spurious-aborted.js`
         if (this.socket && !this.socket.destroyed && this.aborted) {
             this.socket.destroy(err);
-            const cleanup = finished(this.socket, (e) => {
-                if (e?.code === "ERR_STREAM_PREMATURE_CLOSE") {
+            const cleanup = finished(this.socket, e => {
+                if (e?.code === 'ERR_STREAM_PREMATURE_CLOSE') {
                     e = null;
                 }
                 cleanup();
@@ -247,14 +249,14 @@ export default class FetchIncomingMessage extends Readable implements Request {
             const val = this._headers.get(field);
 
             // Make a delimited list
-            if (typeof val === "string") {
-                this._headers.set(field, (flag === 0 ? ", " : "; ") + value);
+            if (typeof val === 'string') {
+                this._headers.set(field, (flag === 0 ? ', ' : '; ') + value);
             } else {
                 this._headers.set(field, value);
             }
         } else if (flag === 1) {
             // Array header -- only Set-Cookie at the moment
-            const existingSetCookies = this._headers.get("set-cookie");
+            const existingSetCookies = this._headers.get('set-cookie');
 
             if (existingSetCookies) {
                 this._headers.setCookie = [...existingSetCookies, value];
@@ -269,7 +271,10 @@ export default class FetchIncomingMessage extends Readable implements Request {
             if (!this._headers.has(field)) {
                 this._headers.set(field, value);
             } else {
-                this._headers.set(field, this._headers.get(field) + ", " + value);
+                this._headers.set(
+                    field,
+                    this._headers.get(field) + ', ' + value
+                );
             }
         } else if (!this._headers.has(field)) {
             // Drop duplicates

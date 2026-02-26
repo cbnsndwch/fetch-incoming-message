@@ -1,12 +1,12 @@
-import { Socket } from "node:net";
-import { Server as HttpServer, IncomingMessage, createServer } from "node:http";
+import { Socket } from 'node:net';
+import { Server as HttpServer, IncomingMessage, createServer } from 'node:http';
 
-import { describe, it, expect, beforeEach, vi } from "vitest";
-import SuperHeaders from "@mjackson/headers";
+import { describe, it, expect, beforeEach, vi } from 'vitest';
+import SuperHeaders from '@mjackson/headers';
 
-import FetchIncomingMessage from "./fetch-incoming-message.js";
+import FetchIncomingMessage from './fetch-incoming-message.js';
 
-describe("FetchIncomingMessage", () => {
+describe('FetchIncomingMessage', () => {
     // let socket: Socket;
     // let fetchIncomingMessage: FetchIncomingMessage;
 
@@ -19,28 +19,28 @@ describe("FetchIncomingMessage", () => {
         server = createServer(
             // @ts-expect-error
             (_req: any, _res: any) => {
-                console.log("Request received");
+                console.log('Request received');
                 _res.end();
             },
             {
-                IncomingMessage: FetchIncomingMessage,
-            },
+                IncomingMessage: FetchIncomingMessage
+            }
         );
     });
 
-    it("should get headers set by the node:http parser", async () => {
-        await new Promise<void>((resolve) => {
+    it('should get headers set by the node:http parser', async () => {
+        await new Promise<void>(resolve => {
             server.listen(3000, () => {
                 resolve();
             });
         });
 
-        console.log("Server listening on port 3000");
+        console.log('Server listening on port 3000');
 
-        await fetch("http://localhost:3000", {
+        await fetch('http://localhost:3000', {
             headers: {
-                "Content-Type": "application/json",
-            },
+                'Content-Type': 'application/json'
+            }
         });
     });
 
