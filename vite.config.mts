@@ -1,5 +1,5 @@
 /// <reference types="vitest" />
-import { defineConfig } from "vite";
+import { defineConfig } from "vitest/config";
 
 import checker from "vite-plugin-checker";
 import viteTsconfigPaths from "vite-tsconfig-paths";
@@ -26,14 +26,21 @@ export default defineConfig({
         sourcemap: true,
     },
     test: {
-        include: [
-            "./src/*.spec.ts",
-            "./src/*.spec-d.ts",
-            "./src/**/*.spec.ts",
-            "./src/**/*.spec-d.ts",
-        ],
         globals: true,
-        environment: "node",
-        environmentMatchGlobs: [["**/*.spec.ts", "node"]],
+        projects: [
+            {
+                test: {
+                    name: "node",
+                    environment: "node",
+                    include: [
+                        "./src/*.spec.ts",
+                        "./src/*.spec-d.ts",
+                        "./src/**/*.spec.ts",
+                        "./src/**/*.spec-d.ts",
+                    ],
+                    globals: true,
+                },
+            },
+        ],
     },
 });
