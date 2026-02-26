@@ -1,4 +1,4 @@
-import { createServer, IncomingMessage } from "node:http";
+import { createServer } from "node:http";
 
 import FetchIncomingMessage from "../lib/index.js";
 
