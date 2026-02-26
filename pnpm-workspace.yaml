@@ -1,0 +1,5 @@
+onlyBuiltDependencies:
+  - '@playwright/browser-chromium'
+  - esbuild
+  - protobufjs
+  - unix-dgram

@@ -9,7 +9,7 @@
          * Set the JavaScript language version for emitted JavaScript and
          * include compatible library declarations.
          */
-        "target": "ES2022",
+        "target": "ES2024",
         /**
          * Specify a set of bundled library declaration files that describe the
          * target runtime environment.
@@ -99,7 +99,7 @@
         /**
          * Module augmentation
          */
-        "types": ["vitest/globals", "vite/client"]
+        "types": ["vitest/globals"]
     },
     "include": ["src"],
     "exclude": [
