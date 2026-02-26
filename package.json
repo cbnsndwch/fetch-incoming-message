@@ -1,7 +1,12 @@
 {
     "name": "@cbnsndwch/fetch-incoming-message",
-    "description": "An experimental IncomingMessage ",
+    "description": "An experimental fetch-aligned IncomingMessage implementation for node:http",
+    "version": "0.1.0",
     "type": "module",
+    "author": {
+        "name": "Sergio leon",
+        "url": "https://cbnsndwch.io"
+    },
     "scripts": {
         "prepublishOnly": "pnpm run build",
         "clean": "rimraf lib coverage",
