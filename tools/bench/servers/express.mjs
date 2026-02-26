@@ -20,6 +20,6 @@ app.get("/", (_req, res) => {
     body.pipe(res);
 });
 
-app.listen(PORT, () => {
-    console.log(`Server listening on port ${PORT}`);
+const server = app.listen(PORT, () => {
+    console.log(`Server listening on port ${server.address().port}`);
 });

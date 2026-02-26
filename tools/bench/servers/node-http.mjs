@@ -16,4 +16,6 @@ let server = http.createServer((_req, res) => {
     body.pipe(res);
 });
 
-server.listen(PORT);
+server.listen(PORT, () => {
+    console.log(`Server listening on port ${server.address().port}`);
+});
