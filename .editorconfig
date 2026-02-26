@@ -1,0 +1,13 @@
+root = true
+
+# EditorConfig is awesome: https://EditorConfig.org
+[*]
+indent_size = 4
+tab_width = 4
+indent_style = space
+end_of_line = lf
+insert_final_newline = true
+
+[*.{yml,puml}]
+charset = utf-8
+indent_size = 2

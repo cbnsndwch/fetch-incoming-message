@@ -1,0 +1,49 @@
+{
+    "files.eol": "\n",
+    "files.associations": {
+        "*.css": "tailwindcss",
+        ".env": "dotenv"
+    },
+    "svg.preview.background": "transparent",
+    "debug.inlineValues": "on",
+    "explorer.fileNesting.enabled": true,
+    "explorer.fileNesting.patterns": {
+        "*.ts": "${capture}.js,${capture}.spec.ts,${capture}.spec-d.ts,${capture}.spec.tsx,${capture}.spec-d.tsx,${capture}.options.ts,${capture}.test.ts,${capture}.test-d.ts,${capture}.test.tsx,${capture}.test-d.tsx,${capture}.stories.ts,${capture}.stories.tsx,${capture}.mdx,${capture}.css,${capture}.module.css",
+        "*.tsx": "${capture}.jsx,${capture}.spec.tsx,${capture}.spec-d.tsx,${capture}.test.tsx,${capture}.test-d.tsx,${capture}.stories.tsx,${capture}.stories.ts,${capture}.mdx,${capture}.css,${capture}.module.css",
+        "*.js": "${capture}.js.map, ${capture}.min.js, ${capture}.d.ts, ${capture}.http",
+        "*.cjs": "${capture}.cjs.map, ${capture}.min.cjs",
+        "*.json": "${capture}.js,${capture}.ts",
+        ".env": ".env.*",
+        ".eslintrc.json": ".eslintrc.*.json,.eslintignore",
+        ".eslintrc.js": ".eslintrc.*.js,.eslintignore",
+        ".eslintrc.cjs": ".eslintrc.*.cjs,.eslintignore",
+        ".gitignore": ".gitkeep,.gitattributes",
+        ".prettierrc.json": ".prettierrc.*.json,.prettierignore",
+        ".prettierrc": ".prettierignore",
+        "package.json": "package-lock.json,yarn.lock,pnpm-lock.yaml",
+        "vite.config.mts": "vitest.config.mts, vite.config.mts.timestamp-*.mjs",
+        "tsconfig.json": "tsconfig.*.json,tsconfig.tsbuildinfo",
+        "typedoc.config.js": "typedoc.*.jsonc, typedoc.*.json"
+    },
+    "prettier.prettierPath": "node_modules/prettier/index.cjs",
+    "editor.rulers": [
+        80
+    ],
+    "files.watcherExclude": {
+        "**/.git/objects/**": true,
+        "**/.git/subtree-cache/**": true,
+        "**/node_modules/*/**": true,
+        "**/.turbo/**": true,
+    },
+    "vsicons.presets.nestjs": true,
+    "vsicons.presets.tsOfficial": false,
+    "vsicons.presets.jsOfficial": false,
+    "vsicons.presets.hideFolders": false,
+    "vsicons.presets.hideExplorerArrows": false,
+    "vsicons.presets.foldersAllDefaultIcon": false,
+    "cSpell.words": [
+        "Geppetto",
+        "mjackson",
+        "oxfmt"
+    ]
+}
