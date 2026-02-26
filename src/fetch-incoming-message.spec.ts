@@ -20,6 +20,7 @@ describe("FetchIncomingMessage", () => {
             // @ts-expect-error
             (_req: any, _res: any) => {
                 console.log("Request received");
+                _res.end();
             },
             {
                 IncomingMessage: FetchIncomingMessage,
