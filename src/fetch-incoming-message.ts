@@ -97,6 +97,14 @@ export default class FetchIncomingMessage extends Readable implements Request {
         return Buffer.concat(chunks).buffer;
     }
 
+    async bytes(): Promise<Uint8Array> {
+        const chunks = [];
+        for await (const chunk of this.socket) {
+            chunks.push(chunk);
+        }
+        return Buffer.concat(chunks);
+    }
+
     async text() {
         const buffer = await this.arrayBuffer();
         return Buffer.from(buffer).toString("utf-8");
